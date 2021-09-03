@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="SinBot.Views.NewChatMessage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SinBot.Views"
+             xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
+             mc:Ignorable="d">
+    <emoji:TextBlock x:Name="txtChatMessage" Foreground="White" FontSize="15" FontWeight="ExtraBold" TextWrapping="WrapWithOverflow" Padding="3">
+        <TextBlock.Effect>
+            <DropShadowEffect ShadowDepth="0" BlurRadius="3" Opacity="1"/>
+        </TextBlock.Effect>
+    </emoji:TextBlock>
+</UserControl>

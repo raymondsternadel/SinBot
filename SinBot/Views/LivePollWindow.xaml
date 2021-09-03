@@ -1,0 +1,32 @@
+﻿<Window x:Class="SinBot.Views.LivePollWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SinBot.Views"
+        mc:Ignorable="d"
+        Title="LivePollWindow" Height="200" Width="800" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True">
+    <Grid Background="#212121">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <StackPanel x:Name="SPLivePollChoices" Orientation="Horizontal">
+                <Border Background="#8f0101" CornerRadius="50" Width="100" Margin="10,0,10,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="1">
+                            <Label x:Name="LBLPollChoice" FontSize="20" Content="Tester" HorizontalAlignment="Center" Foreground="White"/>
+                            <Label x:Name="LBLPollChoiceCount" FontSize="20" Content="100" HorizontalAlignment="Center" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Background="#8f0101" Grid.Row="1" Margin="300,25,300,25" Content="STOP POLL" FontSize="20" Foreground="White"/>
+    </Grid>
+</Window>

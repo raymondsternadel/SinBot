@@ -1,0 +1,28 @@
+﻿<Window x:Class="SinBot.Views.InformationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SinBot.Views"
+        mc:Ignorable="d"
+        Title="InformationWindow" Height="200" Width="500" WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded" AllowsTransparency="True"
+        x:Name="WinInformationWindow" Topmost="True">
+    <Window.Background>
+        <ImageBrush ImageSource="E:\SinBot\SinBot\MediaFiles\Images\InformationalPopup.png"/>
+    </Window.Background>
+    <Window.CacheMode>
+        <BitmapCache/>
+    </Window.CacheMode>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="TXTInfoPopup" Margin="5,0,10,10" Padding="10" TextWrapping="WrapWithOverflow" Grid.Column="1" Grid.Row="1" FontSize="20" Foreground="White"/>
+        <MediaElement x:Name="MEInfoSound" LoadedBehavior="Manual" Source="e:\sinbot\sinbot\mediafiles\audio\pop.wav" Height="0" Width="0"/>
+    </Grid>
+</Window>

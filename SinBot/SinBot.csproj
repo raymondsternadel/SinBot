@@ -1,0 +1,659 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props" Condition="Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props')" />
+  <Import Project="..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props" Condition="Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props')" />
+  <Import Project="..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.props" Condition="Exists('..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{91FBA0A4-769B-4318-B60A-E309437193F3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SinBot</RootNamespace>
+    <AssemblyName>SinBot</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
+    <Reference Include="Emoji.Wpf, Version=0.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Emoji.Wpf.0.3.3\lib\net40\Emoji.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTriviaSharp, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTriviaSharp.1.1.1\lib\netstandard2.0\OpenTriviaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.7.335.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.7.335\lib\netstandard2.0\SQLite-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.0.4.976, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.2.0.4\lib\net461\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=2.0.4.976, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.2.0.4\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.nativelibrary, Version=2.0.4.976, Culture=neutral, PublicKeyToken=502ed628492ab262, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.2.0.4\lib\net461\SQLitePCLRaw.nativelibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.dynamic_cdecl, Version=2.0.4.976, Culture=neutral, PublicKeyToken=b68184102cba0b3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.provider.dynamic_cdecl.2.0.4\lib\netstandard2.0\SQLitePCLRaw.provider.dynamic_cdecl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.114.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive, Version=5.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.5.0.0\lib\net472\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.5.0.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.5.0.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ToggleSwitch, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToggleSwitch.1.2.0\lib\net46\ToggleSwitch.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.3.2.3\lib\netstandard2.0\TwitchLib.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Core, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Core.3.2.3\lib\netstandard2.0\TwitchLib.Api.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Core.Enums, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Core.Enums.3.2.3\lib\netstandard2.0\TwitchLib.Api.Core.Enums.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Core.Interfaces, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Core.Interfaces.3.2.3\lib\netstandard2.0\TwitchLib.Api.Core.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Core.Models, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Core.Models.3.2.3\lib\netstandard2.0\TwitchLib.Api.Core.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Helix, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Helix.3.2.3\lib\netstandard2.0\TwitchLib.Api.Helix.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Helix.Models, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Helix.Models.3.2.3\lib\netstandard2.0\TwitchLib.Api.Helix.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.V5, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.V5.3.2.3\lib\netstandard2.0\TwitchLib.Api.V5.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.V5.Models, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.V5.Models.3.2.3\lib\netstandard2.0\TwitchLib.Api.V5.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Client, Version=3.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Client.3.2.2\lib\netstandard2.0\TwitchLib.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Client.Enums, Version=3.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Client.Enums.3.2.2\lib\netstandard2.0\TwitchLib.Client.Enums.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Client.Models, Version=3.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Client.Models.3.2.2\lib\netstandard2.0\TwitchLib.Client.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Communication, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Communication.1.0.3\lib\netstandard2.0\TwitchLib.Communication.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.PubSub, Version=3.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.PubSub.3.2.2\lib\netstandard2.0\TwitchLib.PubSub.dll</HintPath>
+    </Reference>
+    <Reference Include="Typography.GlyphLayout, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Emoji.Wpf.0.3.3\lib\net40\Typography.GlyphLayout.dll</HintPath>
+    </Reference>
+    <Reference Include="Typography.OpenFont, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Emoji.Wpf.0.3.3\lib\net40\Typography.OpenFont.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="XPlat.Core, Version=1.7.20109.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XPlat.Core.1.7.20109.1\lib\netstandard2.0\XPlat.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="XPlat.Foundation, Version=1.7.20109.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XPlat.Foundation.1.7.20109.1\lib\netstandard2.0\XPlat.Foundation.dll</HintPath>
+    </Reference>
+    <Reference Include="XPlat.Media.Capture, Version=1.7.20109.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XPlat.Media.Capture.1.7.20109.1\lib\netstandard2.0\XPlat.Media.Capture.dll</HintPath>
+    </Reference>
+    <Reference Include="XPlat.Storage, Version=1.7.20109.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XPlat.Storage.1.7.20109.1\lib\netstandard2.0\XPlat.Storage.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="CustomControls\KeyboardHook.cs" />
+    <Compile Include="DatabaseService.cs" />
+    <Compile Include="Misc\NewChatMessageEventArgs.cs" />
+    <Compile Include="Model\BannedWord.cs" />
+    <Compile Include="Model\Command.cs" />
+    <Compile Include="Model\CommandMessage.cs" />
+    <Compile Include="Model\CommandRecord.cs" />
+    <Compile Include="Model\InformationalMessage.cs" />
+    <Compile Include="Model\PollChoice.cs" />
+    <Compile Include="Model\Viewer.cs" />
+    <Compile Include="SessionContext.cs" />
+    <Compile Include="Views\ChatWindow.xaml.cs">
+      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FullScreenVideoPanel.xaml.cs">
+      <DependentUpon>FullScreenVideoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InformationWindow.xaml.cs">
+      <DependentUpon>InformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LivePage.xaml.cs">
+      <DependentUpon>LivePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LivePollWindow.xaml.cs">
+      <DependentUpon>LivePollWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewChatMessage.xaml.cs">
+      <DependentUpon>NewChatMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PollPage.xaml.cs">
+      <DependentUpon>PollPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PollSetupPage.xaml.cs">
+      <DependentUpon>PollSetupPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SmallVideoPanel.xaml.cs">
+      <DependentUpon>SmallVideoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatsWindow.xaml.cs">
+      <DependentUpon>StatsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TopLeftNotification.xaml.cs">
+      <DependentUpon>TopLeftNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebcamWindow.xaml.cs">
+      <DependentUpon>WebcamWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Credentials.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Theme\MyTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FullScreenVideoPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LivePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LivePollWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewChatMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PollPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PollSetupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SmallVideoPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TopLeftNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WebcamWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="MediaFiles\Audio\Boom\Locust - Boom Sound From Gears of War 2 Soundboard - Soundbo.mp3" />
+    <Content Include="MediaFiles\Audio\Bussin\record-online-voice-recorder_3i6JGZT.mp3" />
+    <Content Include="MediaFiles\Audio\Bussin\vocaroo-10-feb-2021-12_25_50-gmt0000-1o1qbospl0vp.mp3" />
+    <Content Include="MediaFiles\Audio\Bussin\yessir-bro-were-in-school-you-already-know-the-vibes-just-that-bussin-bussin-tiktok-meme.mp3" />
+    <Content Include="MediaFiles\Audio\Bussin\yt1s_lVcImQT.mp3" />
+    <Content Include="MediaFiles\Audio\EasyMoney\easy-money.mp3" />
+    <Content Include="MediaFiles\Audio\Sus\ayo-thats-kinda-sus.mp3" />
+    <Content Include="MediaFiles\NotLive\BeRightBack.mp4" />
+    <Content Include="MediaFiles\NotLive\EndingSoon.mp4" />
+    <Content Include="MediaFiles\NotLive\StartingSoon.mp4" />
+    <Content Include="MediaFiles\Video\BeastMode\o9pBJ03n.mp4" />
+    <Content Include="MediaFiles\Video\Bored\cFa1ASFi.mp4" />
+    <Content Include="MediaFiles\Video\Bored\fMCj2PAd.mp4" />
+    <Content Include="MediaFiles\Video\Bored\Fqgsdutu.mp4" />
+    <Content Include="MediaFiles\Video\Bored\Ki4wMtvL.mp4" />
+    <Content Include="MediaFiles\Video\Bored\vZLzY6UM.mp4" />
+    <Content Include="MediaFiles\Video\CrabRave\AggressiveGlumAuklet.mp4" />
+    <Content Include="MediaFiles\Video\Cry\5XQYdkRb.mp4" />
+    <Content Include="MediaFiles\Video\Cry\aIBL9dEX.mp4" />
+    <Content Include="MediaFiles\Video\Cry\aYnN3ckI.mp4" />
+    <Content Include="MediaFiles\Video\Cry\mUveS7b3.mp4" />
+    <Content Include="MediaFiles\Video\Cry\NGAgLJi8.mp4" />
+    <Content Include="MediaFiles\Video\Cry\p9Mzd3wG.mp4" />
+    <Content Include="MediaFiles\Video\Cry\qdmGuEIy.mp4" />
+    <Content Include="MediaFiles\Video\Cry\V0rbBA8F.mp4" />
+    <Content Include="MediaFiles\Video\DontCuss\FijPrEJM.mp4" />
+    <Content Include="MediaFiles\Video\DontCuss\fiufAzB5.mp4" />
+    <Content Include="MediaFiles\Video\DontCuss\JU04vFBf %281%29.mp4" />
+    <Content Include="MediaFiles\Video\DontCuss\zbF4dT5h.mp4" />
+    <Content Include="MediaFiles\Video\Dude\kVeizNia.mp4" />
+    <Content Include="MediaFiles\Video\Dude\WMguIhPe.mp4" />
+    <Content Include="MediaFiles\Video\Dude\XlKNP9oU.mp4" />
+    <Content Include="MediaFiles\Video\EvilLaugh\5CtrmP2h.mp4" />
+    <Content Include="MediaFiles\Video\EvilLaugh\85isZdeW.mp4" />
+    <Content Include="MediaFiles\Video\EvilLaugh\LBkYz11S.mp4" />
+    <Content Include="MediaFiles\Video\EvilLaugh\LveEIWfA.mp4" />
+    <Content Include="MediaFiles\Video\EvilLaugh\Oh0vhwku.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\5stP87oE.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\AcceptableCheeryBluegill.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\AmazingShrillDorado.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\BlissfulMajesticKangaroo.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\CookedConcernedCoati.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\ExaltedWastefulKingsnake.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\F4peTt8d.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\GeneralThinIchidna.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\Gi4cbqg8.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\gsWXyBM5.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\iRD2PdiP.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\LavishFluffyHapuka.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\LeftDeficientAztecant.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\LightDamagedCero.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\LimitedHeftyChevrotain.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\MindlessGoodDorado.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\ObeseLavishAfricanporcupine.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\PlushBewitchedAnemoneshrimp.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\PoshMassiveArmyant.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\ScarceEcstaticDiplodocus.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\ShowyEuphoricJenny.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\SparklingWeightyLangur.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\XxY47ckM.mp4" />
+    <Content Include="MediaFiles\Video\FacePalm\Ztz62FI0.mp4" />
+    <Content Include="MediaFiles\Video\FBI\I6kU68oS.mp4" />
+    <Content Include="MediaFiles\Video\FBI\PRXBGvOT.mp4" />
+    <Content Include="MediaFiles\Video\Fricks\AgZf3svC.mp4" />
+    <Content Include="MediaFiles\Video\GoodFriends\r1ZbBtVb.mp4" />
+    <Content Include="MediaFiles\Video\GoodJob\ZJwwCzfe.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\0QwTPHIL.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\3xZdq6e2.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\8P9NSEnS.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\b6LN4AfR.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\dLQzB8Aq.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\EC1AB8GP.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\gLuaYkU4.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\JqWRfOf0.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\k5N2TvM8.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\Kb0cU2SY.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\klAfwA7f.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\LOQvuTsW.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\o5lofszt.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\RWCVolQ4.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\XAU9dQxH.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\xdWc666U.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\zWNJ8QFS.mp4" />
+    <Content Include="MediaFiles\Video\MyPartner\Zxw3JdL5.mp4" />
+    <Content Include="MediaFiles\Video\OhMy\b1GwAxTo.mp4" />
+    <Content Include="MediaFiles\Video\Stealth\7XncfYnh.mp4" />
+    <Content Include="MediaFiles\Video\Stealth\fyUUPKlx.mp4" />
+    <Content Include="MediaFiles\Video\Stealth\Rhbfkhqd.mp4" />
+    <Content Include="MediaFiles\Video\Stealth\S58jJE8G.mp4" />
+    <Content Include="MediaFiles\Video\Thicc\OZBeAHkb.mp4" />
+    <Content Include="MediaFiles\Video\ThisGuyStinks\8KvJYoBR.mp4" />
+    <Content Include="MediaFiles\Video\Triggered\AbandonedIllegalFairyfly.mp4" />
+    <Content Include="MediaFiles\Video\Triggered\DescriptiveNegativeDromaeosaur.mp4" />
+    <Content Include="MediaFiles\Video\Triggered\DistinctScaredAgouti.mp4" />
+    <Content Include="MediaFiles\Video\Triggered\FarawayWaterloggedCowbird.mp4" />
+    <Content Include="MediaFiles\Video\Triggered\SingleThornyGar-mobile.mp4" />
+    <Content Include="MediaFiles\Video\Triggered\ThoseMealyHeron.mp4" />
+    <Content Include="MediaFiles\Video\Waiting\myWIWPXE.mp4" />
+    <Content Include="MediaFiles\Video\Waiting\oIPw0jQB.mp4" />
+    <Content Include="MediaFiles\Video\Woo\BKdq8gdx.mp4" />
+    <Content Include="MediaFiles\Video\Woo\m4RKoZuz.mp4" />
+    <Content Include="MediaFiles\Video\Wow\8hf2qd8L.mp4" />
+    <Content Include="MediaFiles\Video\Wow\kVeizNia.mp4" />
+    <Content Include="MediaFiles\Video\Wow\xuEHjjJx.mp4" />
+    <Content Include="MediaFiles\Video\Wow\ZFOPPcJj.mp4" />
+    <Content Include="MediaFiles\Video\YoureOld\1fphMmw5.mp4" />
+    <Content Include="MediaFiles\Video\YoureOld\6xDNnCq0.mp4" />
+    <Content Include="MediaFiles\Video\YoureOld\aZwHcG5T.mp4" />
+    <Content Include="MediaFiles\Video\YoureOld\fiCrHggE.mp4" />
+    <Content Include="SinbotDB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MediaFiles\Video\Dab\0010 %281%29.mp4" />
+    <Content Include="MediaFiles\Video\Dab\fDzwoOp4.mp4" />
+    <Content Include="MediaFiles\Video\Dab\HK54J1ku.mp4" />
+    <Content Include="MediaFiles\Video\Dab\mRdyY9fL.mp4" />
+    <Content Include="MediaFiles\Video\Dab\VI4FQE2k.mp4" />
+    <Content Include="MediaFiles\Video\Hello\wnSMXhdJ %281%29.mp4" />
+    <Content Include="MediaFiles\Video\No\5XQYdkRb.mp4" />
+    <Content Include="MediaFiles\Video\No\65cI9YOz.mp4" />
+    <Content Include="MediaFiles\Video\No\7QianwRs.mp4" />
+    <Content Include="MediaFiles\Video\No\aIBL9dEX.mp4" />
+    <Content Include="MediaFiles\Video\No\aYnN3ckI.mp4" />
+    <Content Include="MediaFiles\Video\No\bwygHkYf.mp4" />
+    <Content Include="MediaFiles\Video\No\cKguUzOn.mp4" />
+    <Content Include="MediaFiles\Video\No\CVJgeqse.mp4" />
+    <Content Include="MediaFiles\Video\No\hXTqEwv5.mp4" />
+    <Content Include="MediaFiles\Video\No\ipwlthUC.mp4" />
+    <Content Include="MediaFiles\Video\No\kS2KGWVl.mp4" />
+    <Content Include="MediaFiles\Video\No\ls1h2J6a.mp4" />
+    <Content Include="MediaFiles\Video\No\m37KfZkx.mp4" />
+    <Content Include="MediaFiles\Video\No\mUveS7b3.mp4" />
+    <Content Include="MediaFiles\Video\No\NGAgLJi8.mp4" />
+    <Content Include="MediaFiles\Video\No\p9Mzd3wG.mp4" />
+    <Content Include="MediaFiles\Video\No\QAWFOJdB.mp4" />
+    <Content Include="MediaFiles\Video\No\qdmGuEIy.mp4" />
+    <Content Include="MediaFiles\Video\No\RA293NP1.mp4" />
+    <Content Include="MediaFiles\Video\No\rZoSJbZW.mp4" />
+    <Content Include="MediaFiles\Video\No\tGXIEjD7.mp4" />
+    <Content Include="MediaFiles\Video\No\V0rbBA8F.mp4" />
+    <Content Include="MediaFiles\Video\No\vjf6PgoP.mp4" />
+    <Content Include="MediaFiles\Video\No\vW1LYqg2.mp4" />
+    <Content Include="MediaFiles\Video\No\WZI7lj67.mp4" />
+    <Content Include="MediaFiles\Video\No\X78TR8gW.mp4" />
+    <Content Include="MediaFiles\Video\No\XutBIXKX.mp4" />
+    <Content Include="MediaFiles\Video\No\Y1j4RWXB.mp4" />
+    <Content Include="MediaFiles\Audio\Bruh\Bruh.mp3" />
+    <Content Include="MediaFiles\Audio\FakeNews\fake-news-great.mp3" />
+    <Content Include="MediaFiles\Audio\Laser1.wav" />
+    <Content Include="MediaFiles\Audio\Laser2.wav" />
+    <Content Include="MediaFiles\Audio\Pog\chiaki-poggers-moment %281%29.mp3" />
+    <Content Include="MediaFiles\Audio\Pog\pogchamp.mp3" />
+    <Content Include="MediaFiles\Audio\Pog\pog_Ma0qJWb.mp3" />
+    <Content Include="MediaFiles\Audio\Pog\quackity-thats-poggers-thats-not-poggers-64-kbps-audiotrimmer.mp3" />
+    <Content Include="MediaFiles\Audio\Pog\ugh-fine-i-guess-you-are-my-little-pogchamp.mp3" />
+    <Content Include="MediaFiles\Audio\pop.wav" />
+    <Content Include="MediaFiles\Audio\Sheesh\img_0280.mp3" />
+    <Content Include="MediaFiles\Audio\Sheesh\original-sheesh.mp3" />
+    <Content Include="MediaFiles\Audio\Sheesh\video0-12_EVb2pWa.mp3" />
+    <Content Include="MediaFiles\Audio\FakeNews\trump-you-are-fake-news.mp3" />
+    <Content Include="MediaFiles\Video\Dab\0001.mp4" />
+    <Content Include="MediaFiles\Video\Dab\0002.mp4" />
+    <Content Include="MediaFiles\Video\Dab\0006.mp4" />
+    <Content Include="MediaFiles\Video\Dab\0008.mp4" />
+    <Content Include="MediaFiles\Video\Dab\ezgif.com-gif-maker %281%29.mp4" />
+    <Content Include="MediaFiles\Video\Dab\ezgif.com-gif-maker %283%29.mp4" />
+    <Content Include="MediaFiles\Video\Dab\ezgif.com-gif-maker %284%29.mp4" />
+    <Content Include="MediaFiles\Video\Floss\ezgif.com-gif-maker %287%29.mp4" />
+    <Content Include="MediaFiles\Video\Floss\ezgif.com-gif-maker %288%29.mp4" />
+    <Content Include="MediaFiles\Video\Floss\ezgif.com-gif-maker %289%29.mp4" />
+    <Content Include="MediaFiles\Video\Floss\GiganticOrnateCockerspaniel.mp4" />
+    <Content Include="MediaFiles\Video\Floss\GratefulQuaintFlyinglemur.mp4" />
+    <Content Include="MediaFiles\Video\Floss\JoyfulImpracticalHoki.mp4" />
+    <Content Include="MediaFiles\Video\Hello\42S2ZhQB.mp4" />
+    <Content Include="MediaFiles\Video\Hello\CRyyWCdK.mp4" />
+    <Content Include="MediaFiles\Video\Hello\hblP5cbI.mp4" />
+    <Content Include="MediaFiles\Video\Hello\iHZ6xXeC.mp4" />
+    <Content Include="MediaFiles\Video\Hello\k1RcUKNH.mp4" />
+    <Content Include="MediaFiles\Video\Hello\lEfeq9gw.mp4" />
+    <Content Include="MediaFiles\Video\Hello\w0XrPBAG.mp4" />
+    <Content Include="MediaFiles\Video\Hello\Wd3KVkiX.mp4" />
+    <Content Include="MediaFiles\Video\YouWhat\ezgif.com-gif-maker %281%29.mp4" />
+    <Content Include="MediaFiles\Video\AreYouSure\John Cena are you sure about that GREENS-%28You2Audio.Com%29.mp4" />
+    <Content Include="MediaFiles\Video\ALotOfDamage\OM4bujJe.mp4" />
+    <Content Include="MediaFiles\Video\Misc\RESET.mp4" />
+    <Content Include="MediaFiles\Video\NotThatGuy\You%27re Not That Guy Pal %28Trust Me%29 %28online-video-cutter.com%29.mp4" />
+    <Content Include="MediaFiles\Video\Nice\0pQOZXRY.mp4" />
+    <Content Include="MediaFiles\Video\Nice\0Wpw28vD.mp4" />
+    <Content Include="MediaFiles\Video\Nice\2ernSpfV.mp4" />
+    <Content Include="MediaFiles\Video\Nice\6JrMtZjA.mp4" />
+    <Content Include="MediaFiles\Video\Nice\aIsavCha.mp4" />
+    <Content Include="MediaFiles\Video\Nice\aQJwavZs.mp4" />
+    <Content Include="MediaFiles\Video\Nice\dqOa0VB6.mp4" />
+    <Content Include="MediaFiles\Video\Nice\FsgsTvCS.mp4" />
+    <Content Include="MediaFiles\Video\Nice\gpYnyg7U.mp4" />
+    <Content Include="MediaFiles\Video\Nice\gSDIhSXJ.mp4" />
+    <Content Include="MediaFiles\Video\Nice\hag2AKsd.mp4" />
+    <Content Include="MediaFiles\Video\Nice\jGtorOpb.mp4" />
+    <Content Include="MediaFiles\Video\Nice\L4aMCmh7.mp4" />
+    <Content Include="MediaFiles\Video\Nice\lgDzl804.mp4" />
+    <Content Include="MediaFiles\Video\Nice\NXvEsCuN.mp4" />
+    <Content Include="MediaFiles\Video\Nice\OGWdaa07.mp4" />
+    <Content Include="MediaFiles\Video\Nice\onTPaFdb.mp4" />
+    <Content Include="MediaFiles\Video\Nice\oZx6cGpG.mp4" />
+    <Content Include="MediaFiles\Video\Nice\pzs1I8yb.mp4" />
+    <Content Include="MediaFiles\Video\Nice\r1fCYMEp.mp4" />
+    <Content Include="MediaFiles\Video\Nice\tVmiYVBz.mp4" />
+    <Content Include="MediaFiles\Video\Nice\uaBQC5ir.mp4" />
+    <Content Include="MediaFiles\Video\Nice\W1i85EW1.mp4" />
+    <Content Include="MediaFiles\Video\Nice\YeRhAfa3.mp4" />
+    <Content Include="MediaFiles\Video\No\0Ve44VE1.mp4" />
+    <Content Include="MediaFiles\Video\No\4c20moDz.mp4" />
+    <Content Include="MediaFiles\Video\No\AnchoredKnobbyBighornedsheep.mp4" />
+    <Content Include="MediaFiles\Video\No\CATdvvC2.mp4" />
+    <Content Include="MediaFiles\Video\No\ezgif.com-gif-maker %285%29.mp4" />
+    <Content Include="MediaFiles\Video\No\ezgif.com-gif-maker %286%29.mp4" />
+    <Content Include="MediaFiles\Video\No\ezgif.com-gif-maker.mp4" />
+    <Content Include="MediaFiles\Video\No\PlushHalfIzuthrush.mp4" />
+    <Content Include="MediaFiles\Video\No\RtWQCyAZ.mp4" />
+    <Content Include="MediaFiles\Video\No\UntimelyMemorableDogfish.mp4" />
+    <Content Include="MediaFiles\Video\No\uUKd1ca5.mp4" />
+    <Content Include="MediaFiles\Video\No\VictoriousVainArmadillo.mp4" />
+    <Content Include="MediaFiles\Video\Win\3qvZ9TcJ.mp4" />
+    <Content Include="MediaFiles\Video\Win\aflS4L3t.mp4" />
+    <Content Include="MediaFiles\Video\Win\dLSjfvCp.mp4" />
+    <Content Include="MediaFiles\Video\Win\fyEkNyG9.mp4" />
+    <Content Include="MediaFiles\Video\Win\FzC9nqVE.mp4" />
+    <Content Include="MediaFiles\Video\Win\HFLloiwE.mp4" />
+    <Content Include="MediaFiles\Video\Win\KKhK4e2R.mp4" />
+    <Content Include="MediaFiles\Video\Win\RdvTXpHe.mp4" />
+    <Content Include="MediaFiles\Video\Win\T3qLoEc3.mp4" />
+    <Content Include="MediaFiles\Video\Win\TuRVMGIA.mp4" />
+    <Content Include="MediaFiles\Video\Win\vU1wocad.mp4" />
+    <Content Include="MediaFiles\Video\Win\WkkGML8h.mp4" />
+    <Content Include="MediaFiles\Video\Win\XC0Y2hsq.mp4" />
+    <Content Include="MediaFiles\Video\Win\yNgsxlvK.mp4" />
+    <Resource Include="MediaFiles\Images\InformationalPopup.png" />
+    <Resource Include="MediaFiles\Images\SinaxxrHead.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.4\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.4\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.targets" Condition="Exists('..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.targets')" />
+  <Import Project="..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.targets" Condition="Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.targets')" />
+  <Import Project="..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.targets" Condition="Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.4\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.4\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" />
+</Project>
